@@ -6,17 +6,17 @@
   "configurations": [
     {
       "type": "java",
-      "name": "Current File",
-      "request": "launch",
-      "mainClass": "${file}"
-    },
-    {
-      "type": "java",
       "name": "TextAlignment",
       "request": "launch",
       "mainClass": "TextAlignment",
-      "projectName": "Java Assiggment_11a65167"
-      // "args": ["java.txt", "left", "10"]
+      "projectName": "Java-Assiggment_ad517a70",
+      "args": ["java.txt", "justify", "30"]
+    },
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
     }
   ]
 }
