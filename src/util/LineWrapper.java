@@ -4,32 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class handles the common task of breaking a paragraph into multiple lines
+ * This class handles the common task of breaking a paragraph into multiple
+ * lines
  * while respecting word boundaries. It's used by most alignment strategies:
  * - Left, Right, and Center alignment all use this for basic line breaking
  * - Justify alignment has its own special logic and doesn't use this
  *
  * The wrapping algorithm:
  * 1. Split the text into individual words
- * 2. Add words to the current line until adding the next word would exceed maxLength
+ * 2. Add words to the current line until adding the next word would exceed
+ * maxLength
  * 3. When a word doesn't fit, start a new line
  * 4. Handle edge cases like words longer than maxLength
  */
 public class LineWrapper {
 
     /**
-     * This method breaks text at word boundaries, meaning it will never split
-     * a word across lines (unless the word itself is longer than maxLength).
-     *
-     * @param text The paragraph text to wrap (should not contain line breaks)
+     * This method breaks text at word boundaries
+     * 
+     * @param text      The paragraph text to wrap (should not contain line breaks)
      * @param maxLength The maximum number of characters allowed per line
      * @return A list of strings, each representing one line of wrapped text
-     *
-     * Example: wrapWords("Hello world how are you", 10) returns:
-     * ["Hello", "world how", "are you"]
-     *
-     * Note: This method preserves exactly one space between words but removes
-     * leading/trailing spaces from each line.
      */
     public static List<String> wrapWords(String text, int maxLength) {
         List<String> lines = new ArrayList<>();
@@ -48,8 +43,8 @@ public class LineWrapper {
             // Check if adding this word (plus a space) would exceed maxLength
             boolean isFirstWordInLine = currentLine.length() == 0;
             int lengthWithThisWord = currentLine.length() +
-                                   (isFirstWordInLine ? 0 : 1) + // space before word (if not first)
-                                   word.length();
+                    (isFirstWordInLine ? 0 : 1) + // space before word (if not first)
+                    word.length();
 
             if (lengthWithThisWord <= maxLength) {
                 // Word fits on current line
@@ -84,13 +79,5 @@ public class LineWrapper {
         }
 
         return lines;
-    }
-
-    /**
-     * Private constructor to prevent instantiation.
-     * This is a utility class with only static methods.
-     */
-    private LineWrapper() {
-        throw new UnsupportedOperationException("LineWrapper is a utility class and should not be instantiated");
     }
 }
