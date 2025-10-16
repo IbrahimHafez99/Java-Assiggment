@@ -5,13 +5,8 @@ import java.util.List;
 
 /**
  * Processes text by applying an alignment strategy to paragraphs.
- * This class acts as the context in the Strategy pattern, delegating the actual
+ * This class acts as the context in the Strategy pattern. it delegates the actual
  * alignment work to the configured strategy object.
- *
- * <p>The processor handles the overall structure of the output, including
- * adding line breaks and blank lines between paragraphs, while the strategy
- * handles the specific alignment logic for each paragraph.
- *
  */
 public class TextProcessor {
 
@@ -39,7 +34,7 @@ public class TextProcessor {
      * Processes all paragraphs using the configured strategy.
      * Each paragraph is processed independently and separated by a blank line.
      *
-     * <p>The method iterates through each paragraph, applies the alignment strategy,
+     * The method iterates through each paragraph, applies the alignment strategy,
      * and builds the final output string with proper formatting. Each line ends with
      * a newline character, and paragraphs are separated by an additional blank line.
      *

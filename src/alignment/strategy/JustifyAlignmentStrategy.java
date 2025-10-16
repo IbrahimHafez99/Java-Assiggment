@@ -5,52 +5,34 @@ import java.util.List;
 
 /**
  * Justify alignment strategy - distributes text evenly across the line.
- * This is the most complex alignment strategy, as it needs to ensure that every line
- * (except the last) fills the entire line length exactly.
+ * it needs to ensure that every line (except the last) fills the entire line
+ * length exactly.
  *
- * <p>Key features:
- * <ul>
- *   <li>Adds words to a line until the next word wouldn't fit</li>
- *   <li>Hyphenates words that are too long to fit on a line</li>
- *   <li>Ensures no line exceeds the maximum length (including hyphen)</li>
- *   <li>Last line is left-aligned (standard typography convention)</li>
- * </ul>
- *
- * <p>Example with lineLength=20:
- * <pre>
- * Input: "The quick brown fox jumps"
- * Output:
- *   "The quick brown fox "  (spaces distributed to fill exactly 20 chars)
- *   "jumps"                 (last line - not justified)
- * </pre>
- *
- * <p>Special rules:
- * <ul>
- *   <li>Last line of paragraph is NOT justified (left-aligned)</li>
- *   <li>Words longer than lineLength are hyphenated</li>
- * </ul>
- *
- * @author Ibrahim Haruna
- * @version 1.0
+ * Adds words to a line until the next word wouldn't fit
+ * Hyphenates words that are too long to fit on a line
+ * Ensures no line exceeds the maximum length (including hyphen)
+ * Last line is left-aligned
  */
 public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
 
     /**
      * Aligns the paragraph with full justification.
-     * Unlike other alignment strategies, this doesn't use LineWrapper because it needs
+     * Unlike other alignment strategies, this doesn't use LineWrapper because it
+     * needs
      * complete control over line breaks to implement hyphenation properly.
      *
-     * <p>Algorithm:
+     * <p>
+     * Algorithm:
      * <ol>
-     *   <li>Split paragraph into words</li>
-     *   <li>Greedily add words to current line until next word won't fit</li>
-     *   <li>If a word is too long for a line by itself, hyphenate it</li>
-     *   <li>Try to hyphenate the next word into current line if possible</li>
-     *   <li>Complete the line and move to next</li>
-     *   <li>Last line is left-aligned (not stretched)</li>
+     * Split paragraph into words
+     * Greedily add words to current line until next word won't fit
+     * If a word is too long for a line by itself, hyphenate it
+     * Try to hyphenate the next word into current line if possible
+     * Complete the line and move to next
+     * Last line is left-aligned (not stretched)
      * </ol>
      *
-     * @param paragraph the text to align
+     * @param paragraph  the text to align
      * @param lineLength maximum characters per line (strictly enforced)
      * @return list of justified lines
      */
@@ -85,7 +67,7 @@ public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
                         // Word is too long - hyphenate it to fit exactly
                         String[] parts = hyphenateToFit(w, lineLength);
                         lines.add(parts[0]);
-                        words[i] = parts[1];  // Replace with remainder
+                        words[i] = parts[1]; // Replace with remainder
                     }
                 } else if (cur.length() + 1 + w.length() <= lineLength) {
                     // Word fits on current line with a space before it
@@ -132,7 +114,7 @@ public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
                         // Only hyphenate if we get meaningful first part
                         if (parts != null && parts[0].length() > 1) {
                             cur.append(' ').append(parts[0]);
-                            words[i] = parts[1];  // Replace with remainder
+                            words[i] = parts[1]; // Replace with remainder
                             lines.add(cur.toString());
                             continue;
                         }
@@ -151,13 +133,14 @@ public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
      * Hyphenates a word to fit within the specified maximum characters.
      * The hyphen is included in the character count.
      *
-     * <p>For example, hyphenating "extraordinary" with maxChars=10 produces:
-     * <ul>
-     *   <li>First part: "extraordi-" (10 characters including hyphen)</li>
-     *   <li>Second part: "nary" (remainder of the word)</li>
+     * <p>
+     * For example, hyphenating "extraordinary" with maxChars=10 produces:
+     * 
+     * First part: "extraordi-" (10 characters including hyphen)
+     * Second part: "nary" (remainder of the word)
      * </ul>
      *
-     * @param word the word to hyphenate
+     * @param word     the word to hyphenate
      * @param maxChars maximum characters for the first part (including hyphen)
      * @return array with two elements: [first part with hyphen, remainder],
      *         or null if hyphenation is not possible
@@ -180,7 +163,6 @@ public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
         String first = word.substring(0, take) + "-";
         String rest = word.substring(take);
 
-        return new String[] {first, rest};
+        return new String[] { first, rest };
     }
 }
-
