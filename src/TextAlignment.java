@@ -57,9 +57,12 @@ public class TextAlignment {
      * @param args the command line arguments to validate
      * @throws InvalidArgumentException if any argument is missing or invalid
      */
+    /** Number of required command line arguments. */
+    private static final int REQUIRED_ARG_COUNT = 3;
+
     private static void validateArgs(String[] args) throws InvalidArgumentException {
         // Check we have exactly three arguments
-        if (args.length != 3) {
+        if (args.length != REQUIRED_ARG_COUNT) {
             throw new InvalidArgumentException("bad arg count");
         }
 

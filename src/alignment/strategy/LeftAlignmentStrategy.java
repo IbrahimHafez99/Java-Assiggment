@@ -11,6 +11,8 @@ import java.util.List;
 public final class LeftAlignmentStrategy implements TextAlignmentStrategy {
 
     /**
+     * Aligns the paragraph to the left margin.
+     *
      * @param paragraph  the text to align
      * @param lineLength maximum characters per line
      * @return list of left-aligned lines

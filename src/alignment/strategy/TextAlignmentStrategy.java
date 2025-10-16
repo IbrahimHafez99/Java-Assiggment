@@ -10,6 +10,8 @@ import java.util.List;
 public interface TextAlignmentStrategy {
 
     /**
+     * Aligns the given paragraph according to the specific alignment strategy.
+     *
      * @param paragraph the paragraph text to be aligned (single paragraph, no line breaks)
      * @param lineLength the maximum number of characters allowed per line
      * @return a list of strings, where each string represents one formatted line

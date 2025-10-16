@@ -163,6 +163,6 @@ public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
         String first = word.substring(0, take) + "-";
         String rest = word.substring(take);
 
-        return new String[] { first, rest };
+        return new String[] {first, rest};
     }
 }
