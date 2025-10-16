@@ -25,8 +25,8 @@ public class CenterAlignmentStrategy implements TextAlignmentStrategy {
         List<String> out = new ArrayList<>(base.size());
         for (String line : base) {
             int total = Math.max(0, lineLength - line.length());
-            int left = total / 2; // floor on left
-            int right = total - left;
+            int right = total / 2; // floor on right
+            int left = total - right; // ceiling on left (gets the extra)
             out.add(repeat(' ', left) + line + repeat(' ', right));
         }
         return out;
