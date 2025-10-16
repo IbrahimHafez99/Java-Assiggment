@@ -16,9 +16,13 @@ import java.util.ArrayList;
 public class FileUtil {
 
     /**
-     * Attempts to read the text file specified by filename and returns an array of Strings (paragraphs) found in the file.
+     * Attempts to read the text file specified by filename and returns an array of
+     * Strings (paragraphs) found in the file.
+     * 
      * @param filename of the file to read
-     * @return Returns an array of Strings, each string representing a paragraph of text from the file. If an exception occurs an array containing the empty string is returned.
+     * @return Returns an array of Strings, each string representing a paragraph of
+     *         text from the file. If an exception occurs an array containing the
+     *         empty string is returned.
      */
     public static String[] readFile(String filename) {
         try {
@@ -42,7 +46,8 @@ public class FileUtil {
         } catch (IOException e) {
             System.out.println("I/O Ooops: " + e.getMessage());
         }
-        // If an exception occurred we will get to here as the return statement above was not executed
+        // If an exception occurred we will get to here as the return statement above
+        // was not executed
         // so setup a paragraphs array to return which contains the empty string
         String[] paragraphs = new String[1];
         paragraphs[0] = "";

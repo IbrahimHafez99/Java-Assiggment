@@ -9,7 +9,7 @@ package util;
  *
  * Example: hyphenate("extraordinarily", 8) returns ["extraor-", "dinarily"]
  */
-public class WordHyphenator {
+public final class WordHyphenator {
 
     /**
      * A simple container to hold the two parts of a hyphenated word.

@@ -9,7 +9,7 @@ package util;
  * - It's clear what values are configurable vs. hard-coded
  * - It prevents typos in string literals scattered across the code
  */
-public class TextConstants {
+public final class TextConstants {
 
     /**
      * The character used to hyphenate words when they need to be split.
