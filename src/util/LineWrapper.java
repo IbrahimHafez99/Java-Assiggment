@@ -21,63 +21,31 @@ public class LineWrapper {
 
     /**
      * This method breaks text at word boundaries
-     * 
+     *
      * @param text      The paragraph text to wrap (should not contain line breaks)
      * @param maxLength The maximum number of characters allowed per line
      * @return A list of strings, each representing one line of wrapped text
      */
     public static List<String> wrapWords(String text, int maxLength) {
         List<String> lines = new ArrayList<>();
-
-        // Handle empty or null input
-        if (text == null || text.trim().isEmpty()) {
+        if (text == null || text.trim().isEmpty())
             return lines;
-        }
-
-        // Split text into words, removing extra whitespace
-        String[] words = text.trim().split(TextConstants.WORD_SPLIT_PATTERN);
-
-        StringBuilder currentLine = new StringBuilder();
-
-        for (String word : words) {
-            // Check if adding this word (plus a space) would exceed maxLength
-            boolean isFirstWordInLine = currentLine.length() == 0;
-            int lengthWithThisWord = currentLine.length() +
-                    (isFirstWordInLine ? 0 : 1) + // space before word (if not first)
-                    word.length();
-
-            if (lengthWithThisWord <= maxLength) {
-                // Word fits on current line
-                if (!isFirstWordInLine) {
-                    currentLine.append(TextConstants.SPACE);
-                }
-                currentLine.append(word);
+        String[] words = text.trim().split("\\s+");
+        StringBuilder cur = new StringBuilder();
+        for (String w : words) {
+            if (cur.length() == 0) {
+                cur.append(w);
+            } else if (cur.length() + 1 + w.length() <= maxLength) {
+                cur.append(' ').append(w);
             } else {
-                // Word doesn't fit, need to start a new line
-
-                // If current line has content, save it
-                if (currentLine.length() > 0) {
-                    lines.add(currentLine.toString());
-                    currentLine = new StringBuilder();
-                }
-
-                // Handle the case where a single word is longer than maxLength
-                if (word.length() > maxLength) {
-                    // For now, just put the long word on its own line
-                    // The justify strategy will handle hyphenation separately
-                    lines.add(word);
-                } else {
-                    // Start new line with this word
-                    currentLine.append(word);
-                }
+                lines.add(cur.toString());
+                cur.setLength(0);
+                // If single word longer than maxLen, put alone (allowed for non-justify)
+                cur.append(w);
             }
         }
-
-        // Don't forget the last line if it has content
-        if (currentLine.length() > 0) {
-            lines.add(currentLine.toString());
-        }
-
+        if (cur.length() > 0)
+            lines.add(cur.toString());
         return lines;
     }
 }

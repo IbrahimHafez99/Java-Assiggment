@@ -37,36 +37,16 @@ public class TextProcessor {
      * @param lineLength Maximum characters per line
      * @return Formatted text ready for output
      */
-    public String processText(String[] paragraphs, int lineLength) {
-        if (paragraphs == null || paragraphs.length == 0) {
-            return "";
-        }
-
-        StringBuilder result = new StringBuilder();
-
-        // Process each paragraph
+    public String process(String[] paragraphs, int lineLength) {
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < paragraphs.length; i++) {
-            String paragraph = paragraphs[i];
-
-            // Skip empty paragraphs
-            if (paragraph == null || paragraph.trim().isEmpty()) {
-                continue;
+            List<String> lines = strategy.align(paragraphs[i], lineLength);
+            for (String line : lines) {
+                sb.append(line).append('\n');
             }
-
-            // Use the strategy to align this paragraph
-            List<String> alignedLines = strategy.align(paragraph, lineLength);
-
-            // Add each line to the result
-            for (String line : alignedLines) {
-                result.append(line).append("\n");
-            }
-
-            // Add blank line between paragraphs (but not after the last one)
-            if (i < paragraphs.length - 1) {
-                result.append("\n");
-            }
+            if (i < paragraphs.length - 1)
+                sb.append('\n');
         }
-
-        return result.toString();
+        return sb.toString();
     }
 }
