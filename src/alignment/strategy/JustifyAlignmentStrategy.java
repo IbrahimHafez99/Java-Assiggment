@@ -7,11 +7,6 @@ import java.util.List;
  * Justify alignment strategy - distributes text evenly across the line.
  * it needs to ensure that every line (except the last) fills the entire line
  * length exactly.
- *
- * Adds words to a line until the next word wouldn't fit
- * Hyphenates words that are too long to fit on a line
- * Ensures no line exceeds the maximum length (including hyphen)
- * Last line is left-aligned
  */
 public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
 
@@ -20,17 +15,6 @@ public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
      * Unlike other alignment strategies, this doesn't use LineWrapper because it
      * needs
      * complete control over line breaks to implement hyphenation properly.
-     *
-     * <p>
-     * Algorithm:
-     * <ol>
-     * Split paragraph into words
-     * Greedily add words to current line until next word won't fit
-     * If a word is too long for a line by itself, hyphenate it
-     * Try to hyphenate the next word into current line if possible
-     * Complete the line and move to next
-     * Last line is left-aligned (not stretched)
-     * </ol>
      *
      * @param paragraph  the text to align
      * @param lineLength maximum characters per line (strictly enforced)
@@ -132,13 +116,6 @@ public final class JustifyAlignmentStrategy implements TextAlignmentStrategy {
     /**
      * Hyphenates a word to fit within the specified maximum characters.
      * The hyphen is included in the character count.
-     *
-     * <p>
-     * For example, hyphenating "extraordinary" with maxChars=10 produces:
-     * 
-     * First part: "extraordi-" (10 characters including hyphen)
-     * Second part: "nary" (remainder of the word)
-     * </ul>
      *
      * @param word     the word to hyphenate
      * @param maxChars maximum characters for the first part (including hyphen)

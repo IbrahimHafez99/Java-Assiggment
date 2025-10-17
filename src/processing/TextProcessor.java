@@ -34,10 +34,6 @@ public class TextProcessor {
      * Processes all paragraphs using the configured strategy.
      * Each paragraph is processed independently and separated by a blank line.
      *
-     * The method iterates through each paragraph, applies the alignment strategy,
-     * and builds the final output string with proper formatting. Each line ends with
-     * a newline character, and paragraphs are separated by an additional blank line.
-     *
      * @param paragraphs array of paragraph strings to process
      * @param lineLength maximum number of characters allowed per line
      * @return formatted text as a single string, ready for output
